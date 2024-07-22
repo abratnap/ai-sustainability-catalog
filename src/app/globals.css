@@ -1,33 +1,46 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* globals.css */
+.header {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #f4f4f4;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.search-input {
+  border: none;
+  outline: none;
+  flex: 1;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.tabs-column {
+  background-color: #f8f8f8;
+  border-right: 1px solid #dcdcdc;
+  padding: 1rem;
+}
+
+.tab-item {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.tab-item[aria-selected="true"] {
+  font-weight: bold;
+  background-color: #e0e0e0;
+}
+
+.content-column {
+  padding: 1rem;
+  overflow-y: auto;
 }
