@@ -7,7 +7,6 @@ import AIModels from './AIModels';
 import Publications from './Publications';
 import AITools from './AITools';
 import './globals.css'; // Import the CSS file
-import OpenSource from './OpenSource';
 
 export default function TabsLayout() {
   return (
