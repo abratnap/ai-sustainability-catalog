@@ -1,16 +1,18 @@
 "use client";
 
 import { FlexGrid, Row, Column, Tabs, Tab, TabList, TabPanels, TabPanel, TextInput } from '@carbon/react';
-import { Search } from '@carbon/icons-react';
 import DataSources from './DataSources';
 import AIModels from './AIModels';
 import Publications from './Publications';
 import AITools from './AITools';
 import './globals.css'; // Import the CSS file
+import { Dashboard,  Activity, CloudMonitoring, Settings, Search } from '@carbon/icons-react';
+import {  DataSet, Model, Book, Tools  } from '@carbon/icons-react';
+import { Button, Checkbox } from 'carbon-components-react';
 
-export default function TabsLayout() {
+
+const CataLogHome = () =>  {
   return (
-    <div className="h-screen flex flex-col">
       <FlexGrid style={{ height: '100%' }}>
         {/* Header Row */}
         <Row className="header">
@@ -32,13 +34,13 @@ export default function TabsLayout() {
 
         {/* Tabs and Content Row */}
         <Row style={{ flex: 1 }}>
-          <Column sm={3} md={3} lg={3} className="tabs-column">
+          <Column sm={3} md={3} lg={3}>
             <Tabs>
               <TabList aria-label="List of tabs">
-                <Tab className="tab-item">Data Sources</Tab>
-                <Tab className="tab-item">AI Models</Tab>
-                <Tab className="tab-item">Publications</Tab>
-                <Tab className="tab-item">General AI Tools</Tab>
+                <Tab renderIcon={DataSet as any} className="tab-item">Data Sources</Tab>
+                <Tab renderIcon={Model as any} className="tab-item">AI Models</Tab>
+                <Tab renderIcon={Book as any} className="tab-item">Publications</Tab>
+                <Tab renderIcon={DataSet as any} className="tab-item">General AI Tools</Tab>
               </TabList>
               <TabPanels>
                 <TabPanel>
@@ -56,11 +58,15 @@ export default function TabsLayout() {
               </TabPanels>
             </Tabs>
           </Column>
+         
+        </Row>
+        <Row style={{ flex: 1 }}>
           <Column sm={9} md={9} lg={9} className="content-column">
             {/* This column will hold the selected TabPanel */}
           </Column>
         </Row>
       </FlexGrid>
-    </div>
   );
 }
+
+export default CataLogHome;

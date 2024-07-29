@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-sans"> {/* Apply IBM font class if needed */}
         {children}
-      </body>
+        </body>
     </html>
   );
 }
