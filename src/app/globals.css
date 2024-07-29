@@ -1,3 +1,15 @@
+/* globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optionally add custom styles */
+
+/* globals.css */
+@import "~carbon-components/css/carbon-components.min.css";
+/* Add other imports or custom styles here */
+
+
 /* custom.css */
 .cds--tabs__nav-item--close-icon--selected {
   display: none !important;
@@ -59,4 +71,8 @@
 .content-column {
   padding: 1rem;
   overflow-y: auto;
+}
+/* globals.css */
+.bg-primary-blue {
+  background-color: #004f9d; /* Example blue color */
 }

@@ -1,71 +1,64 @@
-"use client";
+import path from 'path';
+import fs from 'fs';
+import yaml from 'js-yaml';
+import CataLogHome from './components/CataLogHome';
 
-import { FlexGrid, Row, Column, Tabs, Tab, TabList, TabPanels, TabPanel, TextInput } from '@carbon/react';
-import DataSources from './DataSources';
-import AIModels from './AIModels';
-import Publications from './Publications';
-import AITools from './AITools';
-import './globals.css'; // Import the CSS file
-import { Dashboard,  Activity, CloudMonitoring, Settings, Search } from '@carbon/icons-react';
-import {  DataSet, Model, Book, Tools  } from '@carbon/icons-react';
-import { Button, Checkbox } from 'carbon-components-react';
-
-
-const CataLogHome = () =>  {
-  return (
-      <FlexGrid style={{ height: '100%' }}>
-        {/* Header Row */}
-        <Row className="header">
-          <Column sm={8} md={8} lg={8}>
-            <h1 className="text-2xl font-bold">AI Sustainability Catalog</h1>
-          </Column>
-          <Column sm={4} md={4} lg={4}>
-            <div className="search-container">
-              <Search className="text-gray-600 mx-2" />
-              <TextInput
-                id="search-box"
-                placeholder="Search..."
-                labelText=""
-              />
-            </div>
-          </Column>
-        </Row>
-
-        {/* Tabs and Content Row */}
-        <Row style={{ flex: 1 }}>
-          <Column sm={3} md={3} lg={3}>
-            <Tabs>
-              <TabList aria-label="List of tabs">
-                <Tab renderIcon={DataSet as any} className="tab-item">Data Sources</Tab>
-                <Tab renderIcon={Model as any} className="tab-item">AI Models</Tab>
-                <Tab renderIcon={Book as any} className="tab-item">Publications</Tab>
-                <Tab renderIcon={DataSet as any} className="tab-item">General AI Tools</Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel>
-                  <DataSources />
-                </TabPanel>
-                <TabPanel>
-                  <AIModels />
-                </TabPanel>
-                <TabPanel>
-                  <Publications />
-                </TabPanel>
-                <TabPanel>
-                  <AITools />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Column>
-         
-        </Row>
-        <Row style={{ flex: 1 }}>
-          <Column sm={9} md={9} lg={9} className="content-column">
-            {/* This column will hold the selected TabPanel */}
-          </Column>
-        </Row>
-      </FlexGrid>
-  );
+interface Dataset {
+  name: string;
+  description: string;
+  url: string;
 }
 
-export default CataLogHome;
+interface Model {
+  name: string;
+  description: string;
+  url: string;
+}
+
+interface Tool {
+  name: string;
+  description: string;
+  url: string;
+}
+
+interface Publication {
+  title: string;
+  description: string;
+  url?: string;
+}
+
+const HomePage = async () => {
+  let datasets: Dataset[] = [];
+  let models: Model[] = [];
+  let tools: Tool[] = [];
+  let publications: Publication[] = [];
+
+  try {
+    const filePath = path.join(process.cwd(), 'public/datasets.yml');
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const data = yaml.load(fileContent) as {
+      datasets: Dataset[];
+      models: Model[];
+      tools: Tool[];
+      publications: Publication[];
+    };
+
+    datasets = data.datasets || [];
+    models = data.models || [];
+    tools = data.tools || [];
+    publications = data.publications || [];
+  } catch (error) {
+    console.error('Error reading or parsing YAML file:', error);
+  }
+
+  return (
+    <CataLogHome
+      datasets={datasets}
+      models={models}
+      tools={tools}
+      publications={publications}
+    />
+  );
+};
+
+export default HomePage;

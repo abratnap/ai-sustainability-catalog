@@ -1,14 +1,15 @@
 // src/app/layout.tsx
-import type { Metadata } from "next";
-import "../app/globals.css"; // Ensure this imports your global styles, including fonts
+import Header from './components/Header';
+import Footer from './components/Footer';
+import type { Metadata } from 'next';
+import '../app/globals.css';
 
-// Define your metadata
+
 export const metadata: Metadata = {
-  title: "AI Sustainability Catalog",
-  description: "AI Sustainability Catalog",
+  title: 'AI Sustainability Catalog',
+  description: 'AI Sustainability Catalog',
 };
 
-// Root layout component
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -16,9 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans"> {/* Apply IBM font class if needed */}
-        {children}
-        </body>
+      <body className="font-sans">
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
