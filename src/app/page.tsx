@@ -25,7 +25,6 @@ const CataLogHome = () =>  {
               <TextInput
                 id="search-box"
                 placeholder="Search..."
-                className="search-input"
                 labelText=""
               />
             </div>
