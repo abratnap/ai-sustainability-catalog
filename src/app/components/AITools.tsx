@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-interface Tool {
+export interface Tool {
   name: string;
   description: string;
   url: string;
@@ -12,11 +12,11 @@ interface Tool {
   subsubcategory?: string;
 }
 
-interface Props {
+export interface Tools {
   tools: Tool[];
 }
 
-const AITools: React.FC<Props> = ({ tools }) => {
+const AITools: React.FC<Tools> = ({ tools }) => {
   return (
     <div className="space-y-4">
       {tools.map((tool, index) => (

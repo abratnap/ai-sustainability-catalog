@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-interface Publication {
+export interface Publication {
   title: string;
   venue: string;
   year: number;
@@ -14,11 +14,11 @@ interface Publication {
   subsubcategory?: string;
 }
 
-interface Props {
+export interface PublicationsData {
   publications: Publication[];
 }
 
-const Publications: React.FC<Props> = ({ publications }) => {
+const Publications: React.FC<PublicationsData> = ({ publications }) => {
   return (
     <div className="space-y-4">
       {publications.map((publication, index) => (

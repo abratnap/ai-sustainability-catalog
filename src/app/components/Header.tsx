@@ -1,22 +1,26 @@
+// src/app/components/Header.tsx
 'use client';
 import React from 'react';
-import { Header as CarbonHeader, HeaderName } from 'carbon-components-react';
+import { TextInput } from '@carbon/react';
+import { Search } from '@carbon/icons-react';
+import styles from './Header.module.css';
 
 const Header: React.FC = () => {
   return (
-    <CarbonHeader
-      aria-label="Header"
-      className="bg-carbon-blue border-b border-gray-300 py-4" // Added padding here for space before and after
-    >
-      <HeaderName 
-        href="/" 
-        prefix="    " 
-        className="text-white text-2xl font-bold"
-      >
-        {/* Add your logo or brand name here */}
-        AI Sustainability Catalog
-      </HeaderName>
-    </CarbonHeader>
+    <header className={styles.header}>
+      <div className={styles.overlay}>
+        <h1 className={styles.headerTitle}>AI Sustainability Catalog</h1>
+        <p className={styles.headerDescription}>
+          Your go-to resource for AI models, data sources, tools, and publications for sustainability
+        </p>
+        <div className={styles.searchContainer}>
+          <div className={styles.searchBox}>
+            <Search className={styles.searchIcon} />
+            <TextInput id="search-box" placeholder="Search..." labelText="" />
+          </div>
+        </div>
+      </div>
+    </header>
   );
 };
 

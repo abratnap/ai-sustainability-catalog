@@ -1,7 +1,7 @@
 // src/app/AIModels.tsx
 import React from 'react';
 
-interface Model {
+export interface Model {
   name: string;
   description: string;
   category: string;
@@ -15,11 +15,11 @@ interface Model {
   };
 }
 
-interface Props {
+export interface Models {
   models: Model[];
 }
 
-const AIModels: React.FC<Props> = ({ models }) => {
+const AIModels: React.FC<Models> = ({ models }) => {
   return (
     <div className="space-y-4">
       {models.map((model, index) => (

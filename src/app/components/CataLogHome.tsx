@@ -2,24 +2,16 @@
 'use client';
 
 import React from 'react';
-import { FlexGrid, Row, Column, Tabs, Tab, TabList, TabPanels, TabPanel, TextInput } from '@carbon/react';
+import { FlexGrid, Row, Column, Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
 import DataSources from './DataSources';
 import AIModels from './AIModels';
 import Publications from './Publications';
 import AITools from './AITools';
-import { Search } from '@carbon/icons-react';
+import styles from './CataLogHome.module.css';
 
 const CataLogHome = ({ datasets, models, tools, publications }) => {
   return (
-    <FlexGrid style={{ height: '100%' }}>
-      <Row className="header">
-        <Column sm={4} md={4} lg={4}>
-          <div className="search-container">
-            <Search className="text-gray-600 mx-2" />
-            <TextInput id="search-box" placeholder="Search..." labelText="" />
-          </div>
-        </Column>
-      </Row>
+    <FlexGrid className={styles.flexGrid}>
       <Row style={{ flex: 1 }}>
         <Column sm={3} md={3} lg={3}>
           <Tabs>

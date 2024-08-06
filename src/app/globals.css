@@ -9,6 +9,11 @@
 @import "~carbon-components/css/carbon-components.min.css";
 /* Add other imports or custom styles here */
 
+/* src/app/globals.css */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif; /* Example font */
+}
 
 /* custom.css */
 .cds--tabs__nav-item--close-icon--selected {

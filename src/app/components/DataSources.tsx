@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-interface Dataset {
+export interface Dataset {
   name: string;
   description: string;
   url: string;
@@ -12,11 +12,11 @@ interface Dataset {
   subsubcategory?: string;
 }
 
-interface Props {
+export interface Datasets {
   datasets: Dataset[];
 }
 
-const DataSources: React.FC<Props> = ({ datasets }) => {
+const DataSources: React.FC<Datasets> = ({ datasets }) => {
   return (
     <div className="space-y-4">
       {datasets.map((dataset, index) => (
