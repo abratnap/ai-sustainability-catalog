@@ -1,15 +1,61 @@
-// src/components/CataLogHome.tsx
-'use client';
+// // src/components/CataLogHome.tsx
+"use client";
 
-import React from 'react';
-import { FlexGrid, Row, Column, Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
-import DataSources from './DataSources';
-import AIModels from './AIModels';
-import Publications from './Publications';
-import AITools from './AITools';
-import styles from './CataLogHome.module.css';
+import React from "react";
+import {
+  FlexGrid,
+  Row,
+  Column,
+  Tabs,
+  Tab,
+  TabList,
+  TabPanels,
+  TabPanel,
+} from "@carbon/react";
+import DataSources from "./DataSources";
+import AIModels from "./AIModels";
+import Publications from "./Publications";
+import AITools from "./AITools";
+import styles from "./CataLogHome.module.css";
+import useSearchStore from "./Searchstore";
 
 const CataLogHome = ({ datasets, models, tools, publications }) => {
+  const query = useSearchStore((state) => state.query);
+
+  const filterData = (data: any[]) => {
+    const lowerCaseQuery = query.toLowerCase();
+
+    if (!lowerCaseQuery) {
+      // Return all data if query is empty
+      return data;
+    }
+
+    return data.filter((item) => {
+      const nameMatches =
+        item.name && item.name.toLowerCase().includes(lowerCaseQuery);
+      const categoryMatches =
+        item.category && item.category.toLowerCase().includes(lowerCaseQuery);
+      const subcategoryMatches =
+        item.subcategory &&
+        item.subcategory.toLowerCase().includes(lowerCaseQuery);
+      const subsubcategoryMatches =
+        item.subsubcategory &&
+        item.subsubcategory.toLowerCase().includes(lowerCaseQuery);
+
+      return (
+        nameMatches ||
+        categoryMatches ||
+        subcategoryMatches ||
+        subsubcategoryMatches
+      );
+    });
+  };
+
+  const filteredDatasets = filterData(datasets);
+  const filteredModels = filterData(models);
+  const filteredTools = filterData(tools);
+  const filteredPublications = filterData(publications);
+
   return (
     <FlexGrid className={styles.flexGrid}>
       <Row style={{ flex: 1 }}>
@@ -23,17 +69,32 @@ const CataLogHome = ({ datasets, models, tools, publications }) => {
             </TabList>
             <TabPanels>
               <TabPanel>
-                <DataSources datasets={datasets} />
+                {filteredDatasets.length === 0 ? (
+                  <p>No results found</p>
+                ) : (
+                  <DataSources datasets={filteredDatasets} />
+                )}
               </TabPanel>
               <TabPanel>
-                <AIModels models={models} />
+                {filteredModels.length === 0 ? (
+                  <p>No results found</p>
+                ) : (
+                  <AIModels models={filteredModels} />
+                )}
               </TabPanel>
-             
               <TabPanel>
-                <Publications publications={publications} />
+                {filteredPublications.length === 0 ? (
+                  <p>No results found</p>
+                ) : (
+                  <Publications publications={filteredPublications} />
+                )}
               </TabPanel>
               <TabPanel>
-                <AITools tools={tools} />
+                {filteredTools.length === 0 ? (
+                  <p>No results found</p>
+                ) : (
+                  <AITools tools={filteredTools} />
+                )}
               </TabPanel>
             </TabPanels>
           </Tabs>
