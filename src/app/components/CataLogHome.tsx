@@ -33,6 +33,9 @@ const CataLogHome = ({ datasets, models, tools, publications }) => {
     return data.filter((item) => {
       const nameMatches =
         item.name && item.name.toLowerCase().includes(lowerCaseQuery);
+      const descriptionMatches =
+        item.description &&
+        item.description.toLowerCase().includes(lowerCaseQuery);
       const categoryMatches =
         item.category && item.category.toLowerCase().includes(lowerCaseQuery);
       const subcategoryMatches =
@@ -41,12 +44,23 @@ const CataLogHome = ({ datasets, models, tools, publications }) => {
       const subsubcategoryMatches =
         item.subsubcategory &&
         item.subsubcategory.toLowerCase().includes(lowerCaseQuery);
+      const publicationMatch =
+        item.publication &&
+        item.publication.toLowerCase().includes(lowerCaseQuery);
+      const venueMatch =
+        item.venue && item.venue.toLowerCase().includes(lowerCaseQuery);
+      const titleMatch =
+        item.title && item.title.toLowerCase().includes(lowerCaseQuery);
 
       return (
         nameMatches ||
         categoryMatches ||
         subcategoryMatches ||
-        subsubcategoryMatches
+        subsubcategoryMatches ||
+        publicationMatch ||
+        descriptionMatches ||
+        venueMatch ||
+        titleMatch
       );
     });
   };
@@ -55,6 +69,12 @@ const CataLogHome = ({ datasets, models, tools, publications }) => {
   const filteredModels = filterData(models);
   const filteredTools = filterData(tools);
   const filteredPublications = filterData(publications);
+
+  const getDatasetsResultCount = (filteredData: any[]) => filteredData.length;
+  const getModelsResultCount = (filteredData: any[]) => filteredData.length;
+  const getToolsResultCount = (filteredData: any[]) => filteredData.length;
+  const getPublicationsResultCount = (filteredData: any[]) =>
+    filteredData.length;
 
   return (
     <FlexGrid className={styles.flexGrid}>
@@ -69,6 +89,11 @@ const CataLogHome = ({ datasets, models, tools, publications }) => {
             </TabList>
             <TabPanels>
               <TabPanel>
+                <p>
+                  Total Results Found:{" "}
+                  {getDatasetsResultCount(filteredDatasets)}
+                </p>
+
                 {filteredDatasets.length === 0 ? (
                   <p>No results found</p>
                 ) : (
@@ -76,6 +101,9 @@ const CataLogHome = ({ datasets, models, tools, publications }) => {
                 )}
               </TabPanel>
               <TabPanel>
+                <p>
+                  Total Results Found: {getModelsResultCount(filteredModels)}
+                </p>
                 {filteredModels.length === 0 ? (
                   <p>No results found</p>
                 ) : (
@@ -83,6 +111,7 @@ const CataLogHome = ({ datasets, models, tools, publications }) => {
                 )}
               </TabPanel>
               <TabPanel>
+                <p>Total Results Found: {getToolsResultCount(filteredTools)}</p>
                 {filteredPublications.length === 0 ? (
                   <p>No results found</p>
                 ) : (
@@ -90,6 +119,10 @@ const CataLogHome = ({ datasets, models, tools, publications }) => {
                 )}
               </TabPanel>
               <TabPanel>
+                <p>
+                  Total Results Found:{" "}
+                  {getPublicationsResultCount(filteredPublications)}
+                </p>
                 {filteredTools.length === 0 ? (
                   <p>No results found</p>
                 ) : (

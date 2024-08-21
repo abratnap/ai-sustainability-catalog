@@ -1,11 +1,13 @@
 /* src/components/CataLogHome.module.css */
 .flexGrid {
+    margin-top: 5px;
     margin-left: 40px;  /* Increase margin as needed */
     margin-right: 40px; /* Increase margin as needed */
   }
   
   .tabs {
     /* Remove previous tab styles to keep default appearance */
+    
   }
   
   .tabItem {
@@ -20,4 +22,6 @@
   .tabItem[aria-selected="false"]:hover {
     /* Add hover styles if needed */
   }
+  
+
   
